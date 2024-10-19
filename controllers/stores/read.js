@@ -1,19 +1,17 @@
 import Store from "../../models/Store.js";
 
-let allStores = async (req, res) => {
+let allStores = async (req, res, next) => {
     try {
         let all = await Store.find()
         return res.status(200).json({
             response: all
         })
     } catch (error) {
-        return res.status(500).json({
-            response: error
-        })
+        next(error)
     }
 }
 
-let storesByName = async (req, res) => {
+let storesByName = async (req, res, next) => {
     try {
         let name = req.params.name
         
@@ -22,13 +20,11 @@ let storesByName = async (req, res) => {
             response: store
         })
     } catch (error) {
-        return res.status(500).json({
-            response: error
-        })
+        next(error)
     }
 }
 
-let storesByPhone = async (req, res) => {
+let storesByPhone = async (req, res, next) => {
     try {
         let phone = req.params.phone
         
@@ -37,9 +33,7 @@ let storesByPhone = async (req, res) => {
             response: stores
         })
     } catch (error) {
-        return res.status(500).json({
-            response: error
-        })
+        next(error)
     }
 }
 

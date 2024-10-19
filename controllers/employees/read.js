@@ -1,19 +1,17 @@
 import Employee from "../../models/Employee.js";
 
-let allEmployees = async (req, res) => {
+let allEmployees = async (req, res, next) => {
     try {
         let all = await Employee.find()
         return res.status(200).json({
             response: all
         })
     } catch (error) {
-        return res.status(500).json({
-            response: error
-        })
+        next(error)
     }
 }
 
-let employeesByName = async (req, res) => {
+let employeesByName = async (req, res, next) => {
     try {
         let name = req.params.name
         
@@ -22,13 +20,11 @@ let employeesByName = async (req, res) => {
             response: employee
         })
     } catch (error) {
-        return res.status(500).json({
-            response: error
-        })
+        next(error)
     }
 }
 
-let employeesByAge = async (req, res) => {
+let employeesByAge = async (req, res, next) => {
     try {
         let age = req.params.age
         
@@ -37,9 +33,7 @@ let employeesByAge = async (req, res) => {
             response: employee
         })
     } catch (error) {
-        return res.status(500).json({
-            response: error
-        })
+        next(error)
     }
 }
 
